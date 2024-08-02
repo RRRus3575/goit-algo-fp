@@ -98,7 +98,7 @@ def animate_traversal(traversal, pos, title):
             prev_node.color = colors[num - 1]
 
         current_node = traversal[num]
-        current_node.color = 'red'  # Колір для поточного відвідуваного вузла
+        current_node.color = 'red'  
 
         draw_tree(traversal[0], pos, ax, f"{title}: Step {num + 1}")
 
