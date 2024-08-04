@@ -51,18 +51,27 @@ def sorted_merge(a, b):
     return result
 
 def merge_two_sorted_lists(l1, l2):
-    if not l1:
-        return l2
-    if not l2:
-        return l1
+    dummy = ListNode(0)
+    current = dummy
 
-    if l1.value <= l2.value:
-        result = l1
-        result.next = merge_two_sorted_lists(l1.next, l2)
-    else:
-        result = l2
-        result.next = merge_two_sorted_lists(l1, l2.next)
-    return result
+    while l1 and l2:
+        if l1.value <= l2.value:
+            current.next = l1
+            l1 = l1.next
+        else:
+            current.next = l2
+            l2 = l2.next
+        current = current.next
+
+    current.next = l1 if l1 else l2
+
+    return dummy.next
+
+def print_list(head):
+    while head:
+        print(head.value, end=" -> ")
+        head = head.next
+    print("None")
 
 
 list1 = ListNode(1, ListNode(3, ListNode(5)))
@@ -70,22 +79,14 @@ list2 = ListNode(2, ListNode(4, ListNode(6)))
 
 print("Реверсований список:")
 reversed_list = reverse_list(list1)
-while reversed_list:
-    print(reversed_list.value, end=" -> ")
-    reversed_list = reversed_list.next
-print("None")
+print_list(reversed_list)
 
 list3 = ListNode(3, ListNode(1, ListNode(4, ListNode(2))))
 print("Відсортований список:")
 sorted_list = merge_sort(list3)
-while sorted_list:
-    print(sorted_list.value, end=" -> ")
-    sorted_list = sorted_list.next
-print("None")
+print_list(sorted_list)
 
+list1 = ListNode(1, ListNode(3, ListNode(5)))  
 print("Об'єднаний список:")
 merged_list = merge_two_sorted_lists(list1, list2)
-while merged_list:
-    print(merged_list.value, end=" -> ")
-    merged_list = merged_list.next
-print("None")
+print_list(merged_list)
